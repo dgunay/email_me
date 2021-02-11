@@ -1,0 +1,17 @@
+[package]
+name = "email_me"
+version = "0.1.0"
+authors = ["Devin Gunay <devingunay@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rusoto_core = "0.46.0"
+rusoto_sns = "0.46.0"
+rusoto_credential = "0.46.0"
+getopts = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+futures = "0.3"
+tokio = "1"

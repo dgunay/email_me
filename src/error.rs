@@ -1,6 +1,6 @@
 #[derive(Debug)]
 pub enum Error {
-    Generic(String)
+    Generic(String),
 }
 
 impl From<serde_json::Error> for Error {

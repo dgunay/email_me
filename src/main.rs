@@ -12,7 +12,7 @@ use rusoto_core::Region;
 use rusoto_sns::{PublishError, PublishInput, PublishResponse, Sns, SnsClient};
 use serde::Deserialize;
 use serde_json::json;
-use std::{env, net::SocketAddr, str::FromStr};
+use std::{env, net::{IpAddr, SocketAddr}, str::FromStr};
 use tokio::runtime::Runtime;
 
 fn print_usage(program: &str, opts: Options) {
@@ -51,6 +51,7 @@ fn main() -> Result<()> {
         .unwrap_or("arn:aws:sns:us-east-2:250463611689:email-me".to_string());
 
     if matches.opt_present("e") {
+        println!("Starting server");
         // Run a server to continually service requests
         Runtime::new()
             .unwrap()
@@ -78,8 +79,7 @@ fn main() -> Result<()> {
 }
 
 async fn serve_requests(client: &SnsClient, topic_arn: &String) -> Result<()> {
-    // We'll bind to 127.0.0.1:3000
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
 
     // A `Service` is needed for every connection, so this
     // creates one from our function.
